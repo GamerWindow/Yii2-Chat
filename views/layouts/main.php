@@ -60,6 +60,10 @@ echo Nav::widget([
             'label' => 'About',
             'url' => ['/site/about'],
         ],
+        [
+            'label' => 'API',
+            'url' => ['/api/message'],
+        ],
         Yii::$app->user->isGuest ? (
             [
                 'label' => 'Login',

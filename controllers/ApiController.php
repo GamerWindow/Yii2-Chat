@@ -13,4 +13,17 @@ class ApiController extends Controller
         $messages = Message::find()->orderBy('datum DESC')->all();
         return $this->asJson($messages);
     }
+    public function actionNewmessage($inhalt, $name)
+    {
+        $message = new Message();
+        $message->name = $name;
+        $message->inhalt = $inhalt;
+        if ($message->save()) {
+            $ok = true;
+        } else {
+            $ok = false;
+        }
+        $messages = Message::find()->orderBy('datum DESC')->all();
+        return $this->asJson(["succes" => $ok]);
+    }
 }

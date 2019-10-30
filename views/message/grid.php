@@ -19,8 +19,5 @@ $this->params['breadcrumbs'][] = $this->title;
 // ...
     ],
 ])?>
-<p>
-Test
-</p>
 
 </div>

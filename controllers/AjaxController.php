@@ -5,53 +5,49 @@ namespace app\controllers;
 use app\models\Message;
 use yii;
 use yii\data\ActiveDataProvider;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\web\Controller;
 
-class MessageController extends Controller
+class AjaxController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
+
         $messages = Message::find()->orderBy('datum DESC')->all();
 
+        $message = new Message();
+        Yii::trace("post:" . print_r(Yii::$app->request->post(), true));
+        if ($message->load(Yii::$app->request->post())) {
+            Yii::trace("message:" . print_r($message->attributes, true));
+            if ($message->validate() && $message->save()) {
+                Yii::$app->session->setFlash('success', "Danke für deine Nachricht :3");
+                //return $this->redirect(['ajax/index']);
+            } else {
+                Yii::$app->session->setFlash('error', "Eingabe falsch!");
+            }
+        }
         return $this->render('index', [
-            "messages" => $messages,
+            'messages' => $messages,
+            'message' => $message,
         ]);
+
     }
 
-    public function actionEingabe()
+    public function actionLinkForm()
+    {
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            $res = array(
+                'body' => print_r($_POST, true),
+                'success' => true,
+            );
+
+            return $res;
+        }
+    }
+
+    public function actionAjax()
     {
         $message = new Message();
         Yii::trace("post:" . print_r(Yii::$app->request->post(), true));
@@ -59,17 +55,14 @@ class MessageController extends Controller
             Yii::trace("message:" . print_r($message->attributes, true));
             if ($message->validate() && $message->save()) {
                 Yii::$app->session->setFlash('success', "Danke für deine Nachricht :3");
-                return $this->redirect(['message/index']);
+                //return $this->redirect(['ajax/ajax']);
             } else {
                 Yii::$app->session->setFlash('error', "Eingabe falsch!");
             }
         }
-        return $this->render('eingabe', ['message' => $message]);
-    }
 
-    public function actionGrid()
-    {
         yii::trace("queryparams:" . print_r(yii::$app->request->queryParams, true));
+
         $provider = new ActiveDataProvider([
             'query' => Message::find(),
             'pagination' => [
@@ -81,8 +74,10 @@ class MessageController extends Controller
         // get the posts in the current page
         //$posts = $provider->getModels();
 
-        return $this->render('grid', [
+        return $this->render('ajax', [
+            'message' => $message,
             "provider" => $provider,
         ]);
     }
+
 }
