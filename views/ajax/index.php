@@ -14,7 +14,7 @@ foreach ($messages as $messag) {
 }
 
 echo Html::endTag('div'); // chat
-
+echo Html::tag('div', '', ['id' => 'chatJ']);
 echo Html::textInput('name', '', ['id' => 'name']);
 echo Html::textInput('inhalt', '', ['id' => 'inh']);
 
@@ -43,19 +43,27 @@ echo $this->registerJs("
                 inhalt: inhalt
             }
 
-          })
-            .done(function( data ) {
-              //if ( console && console.log ) {
-               // console.log( 'Sample of data:', data.slice( 0, 100 ) );
-             // }
-             console.log(data);
-            });
+        })
+        .done(function( data ) {
+            //if ( console && console.log ) {
+            // console.log( 'Sample of data:', data.slice( 0, 100 ) );
+            // }
+            console.log(data);
+        });
 
         // anzeige inhalt/name direkt in chat-div anhängen
 
-        $('#chat').append(inhalt + ' ' + name);
-
+        $('#chatJ').append(inhalt + ' ' + name + '<br />');
         // alert-box mit 'danke'
+
+
+        $.ajax({
+            method:'GET',
+            url: '/yii2-basic/basic/web/index.php?r=api/messages',
+        })
+        .done(function( data ) {
+            console.log(data);
+        });
 
 
         alert( 'Danke.' );

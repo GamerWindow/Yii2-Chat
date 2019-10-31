@@ -8,7 +8,7 @@ use yii\rest\Controller;
 class ApiController extends Controller
 {
 
-    public function actionMessage()
+    public function actionMessages()
     {
         $messages = Message::find()->orderBy('datum DESC')->all();
         return $this->asJson($messages);
