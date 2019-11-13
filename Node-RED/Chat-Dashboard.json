@@ -1,0 +1,737 @@
+[
+    {
+        "id": "bbb20ae0.dfe748",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "32936e83.67663a",
+        "type": "http request",
+        "z": "bbb20ae0.dfe748",
+        "name": "GET request zur Ausgabe",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "10.0.0.46/yii2-basic/basic/web/index.php?r=api/messages",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 360,
+        "y": 200,
+        "wires": [
+            [
+                "e3e46ff1.57d75"
+            ]
+        ]
+    },
+    {
+        "id": "56cb4dae.01b284",
+        "type": "inject",
+        "z": "bbb20ae0.dfe748",
+        "name": "GET Eingabe",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "7f545701.fb1fb"
+            ]
+        ]
+    },
+    {
+        "id": "e3e46ff1.57d75",
+        "type": "debug",
+        "z": "bbb20ae0.dfe748",
+        "name": "ausgebende GET Nachricht",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 620,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c2bf14df.2a1a38",
+        "type": "function",
+        "z": "bbb20ae0.dfe748",
+        "name": "Funktion für POST Param",
+        "func": "\nmsg.headers={ \n    'Content-Type': 'application/x-www-form-urlencoded'\n};\nmsg.payload={\n    name:\"Patrick\",\n    inhalt:\"POST ueber Node-RED\"\n    \n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 300,
+        "wires": [
+            [
+                "d82d41e6.dd48c8"
+            ]
+        ]
+    },
+    {
+        "id": "e428e862.63a75",
+        "type": "inject",
+        "z": "bbb20ae0.dfe748",
+        "name": " GET Abfrage",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "32936e83.67663a"
+            ]
+        ]
+    },
+    {
+        "id": "b2a3503a.1ead28",
+        "type": "debug",
+        "z": "bbb20ae0.dfe748",
+        "name": "eingebende GET Nachricht",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 700,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7f545701.fb1fb",
+        "type": "http request",
+        "z": "bbb20ae0.dfe748",
+        "name": "GET request mit name/inhalt über URL",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "10.0.0.46/yii2-basic/basic/web/index.php?r=api/newmessage&name=PatrickAPI&inhalt=GETRED",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 400,
+        "y": 100,
+        "wires": [
+            [
+                "b2a3503a.1ead28"
+            ]
+        ]
+    },
+    {
+        "id": "ad7fe569.fd7d4",
+        "type": "comment",
+        "z": "bbb20ae0.dfe748",
+        "name": "GET Senden",
+        "info": "Eingabe mit GET Parametern",
+        "x": 90,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ae9960db.f26e1",
+        "type": "comment",
+        "z": "bbb20ae0.dfe748",
+        "name": "GET Empfangen",
+        "info": "Ausgabe mit GET Parametern",
+        "x": 100,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "acf9618a.dc1fc",
+        "type": "inject",
+        "z": "bbb20ae0.dfe748",
+        "name": "POST Eingabe",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "c2bf14df.2a1a38"
+            ]
+        ]
+    },
+    {
+        "id": "6aea1918.c43da",
+        "type": "debug",
+        "z": "bbb20ae0.dfe748",
+        "name": "eingebende POST Nachricht",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 920,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d82d41e6.dd48c8",
+        "type": "http request",
+        "z": "bbb20ae0.dfe748",
+        "name": "POST request mit name/inhalt",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "10.0.0.46/yii2-basic/basic/web/index.php?r=api/postmessage",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 650,
+        "y": 300,
+        "wires": [
+            [
+                "6aea1918.c43da"
+            ]
+        ]
+    },
+    {
+        "id": "f3910351.a84a",
+        "type": "comment",
+        "z": "bbb20ae0.dfe748",
+        "name": "POST Senden",
+        "info": "Eingabe mit POST Parametern",
+        "x": 100,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "576e2d7.829b6d4",
+        "type": "http request",
+        "z": "bbb20ae0.dfe748",
+        "name": "API: zehn Messages",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "10.0.0.46/yii2-basic/basic/web/index.php?r=api/messages",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 600,
+        "y": 520,
+        "wires": [
+            [
+                "d063c9fe.b86e9"
+            ]
+        ]
+    },
+    {
+        "id": "40e81083.900228",
+        "type": "comment",
+        "z": "bbb20ae0.dfe748",
+        "name": "Chat (Ausgabe)",
+        "info": "Ausgabe der Nachrichten",
+        "x": 100,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "d063c9fe.b86e9",
+        "type": "ui_template",
+        "z": "bbb20ae0.dfe748",
+        "group": "ee8659eb.06af8",
+        "name": "Ausgabe als Liste",
+        "order": 1,
+        "width": "9",
+        "height": "6",
+        "format": "\n<table border=\"1\">\n    <tr>\n    <td>Datum</td>\n    <td>Name</td>\n    <td>Nachricht</td>\n    </tr>\n    <tr ng-repeat=\"item in msg.payload\">\n        <td>{{item.datum}}</td>\n        <td>{{item.name}}</td>\n        <td>{{item.inhalt}}</td>\n        <td>\n            <md-button ng-click=\"click(item)\">\n                X\n            </md-button>\n        </td>\n        \n    </tr>\n    \n</table>\n    \n<script>\nscope.click = function(item) {\n       $.ajax({\n            method:'GET',\n            url: 'http://10.0.0.46/yii2-basic/basic/web/index.php',\n            data: {\n                r: \"api/deletepost\",\n                datum: item.datum\n            }\n\n        })\n        .done(function( data ) {\n          \n            alert(\"Eintrag gelöscht.\");\n        });\n    }.bind(scope);\n\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 830,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cecae143.5f4928",
+        "type": "function",
+        "z": "bbb20ae0.dfe748",
+        "name": "10  Nachrichten anzeigen",
+        "func": "\nmsg.headers={ \n    'Content-Type': 'application/x-www-form-urlencoded'\n};\nmsg.payload={\n    anzahl:10\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 520,
+        "wires": [
+            [
+                "576e2d7.829b6d4"
+            ]
+        ]
+    },
+    {
+        "id": "ff98c93d.de48e",
+        "type": "http request",
+        "z": "bbb20ae0.dfe748",
+        "name": "API Request",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "10.0.0.46/yii2-basic/basic/web/index.php?r=api/postmessage",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 550,
+        "y": 440,
+        "wires": [
+            [
+                "cecae143.5f4928",
+                "9bd278ed.0b1648"
+            ]
+        ]
+    },
+    {
+        "id": "8a788e34.b5dd98",
+        "type": "ui_form",
+        "z": "bbb20ae0.dfe748",
+        "name": "Eingabe FORM",
+        "label": "",
+        "group": "abca8314.ebd8f8",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Name",
+                "value": "name",
+                "type": "text",
+                "required": true
+            },
+            {
+                "label": "Nachricht",
+                "value": "inhalt",
+                "type": "text",
+                "required": true
+            }
+        ],
+        "formValue": {
+            "name": "",
+            "inhalt": ""
+        },
+        "payload": "",
+        "submit": "Abschicken",
+        "cancel": "",
+        "topic": "",
+        "x": 180,
+        "y": 440,
+        "wires": [
+            [
+                "a9dd8030.c29fe"
+            ]
+        ]
+    },
+    {
+        "id": "a9dd8030.c29fe",
+        "type": "function",
+        "z": "bbb20ae0.dfe748",
+        "name": "\"POST\" aktivieren",
+        "func": "\nmsg.headers={ \n    'Content-Type': 'application/x-www-form-urlencoded'\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 440,
+        "wires": [
+            [
+                "ff98c93d.de48e"
+            ]
+        ]
+    },
+    {
+        "id": "7c859cf3.073144",
+        "type": "comment",
+        "z": "bbb20ae0.dfe748",
+        "name": "------Programm-------",
+        "info": "Eigentliche Anwendung",
+        "x": 460,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "ad30ce7d.a6e778",
+        "type": "comment",
+        "z": "bbb20ae0.dfe748",
+        "name": "Eingabefeld",
+        "info": "Eingabe Form und Absenden der Nachrichten",
+        "x": 90,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "ad308bf1.edbf4",
+        "type": "comment",
+        "z": "bbb20ae0.dfe748",
+        "name": "Statistik",
+        "info": "",
+        "x": 70,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "c0ff8f41.41945",
+        "type": "comment",
+        "z": "bbb20ae0.dfe748",
+        "name": "GET und POST Tests",
+        "info": "",
+        "x": 460,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "1b9a5ee7.89e991",
+        "type": "function",
+        "z": "bbb20ae0.dfe748",
+        "name": "Menge der Nachrichten zählen",
+        "func": "\nmsg.payload = msg.payload.length;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 600,
+        "wires": [
+            [
+                "fd95e01f.736468"
+            ]
+        ]
+    },
+    {
+        "id": "fd95e01f.736468",
+        "type": "ui_template",
+        "z": "bbb20ae0.dfe748",
+        "group": "25844d4.2e345b2",
+        "name": "Statistik",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 760,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "779f68d1.9e661",
+        "type": "ui_text_input",
+        "z": "bbb20ae0.dfe748",
+        "name": "name",
+        "label": "Name",
+        "tooltip": "",
+        "group": "f032d180.bd6428",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "30",
+        "topic": "name",
+        "x": 70,
+        "y": 680,
+        "wires": [
+            [
+                "7ddb6eb3.252048"
+            ]
+        ]
+    },
+    {
+        "id": "8ab05c7b.c0802",
+        "type": "ui_button",
+        "z": "bbb20ae0.dfe748",
+        "name": "",
+        "group": "f032d180.bd6428",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{}",
+        "payloadType": "global",
+        "topic": "button",
+        "x": 70,
+        "y": 760,
+        "wires": [
+            [
+                "ced874d2.2cacb"
+            ]
+        ]
+    },
+    {
+        "id": "9bd278ed.0b1648",
+        "type": "http request",
+        "z": "bbb20ae0.dfe748",
+        "name": "API: Alle Messages",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "10.0.0.46/yii2-basic/basic/web/index.php?r=api/messages",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 310,
+        "y": 600,
+        "wires": [
+            [
+                "1b9a5ee7.89e991"
+            ]
+        ]
+    },
+    {
+        "id": "673e4e3.d525db",
+        "type": "ui_text_input",
+        "z": "bbb20ae0.dfe748",
+        "name": "inhalt",
+        "label": "Nachricht",
+        "tooltip": "",
+        "group": "f032d180.bd6428",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "inhalt",
+        "x": 70,
+        "y": 720,
+        "wires": [
+            [
+                "7ddb6eb3.252048"
+            ]
+        ]
+    },
+    {
+        "id": "7ddb6eb3.252048",
+        "type": "join",
+        "z": "bbb20ae0.dfe748",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 290,
+        "y": 700,
+        "wires": [
+            [
+                "8a4fb47.2e526c8",
+                "689747f2.361cd8"
+            ]
+        ]
+    },
+    {
+        "id": "8a4fb47.2e526c8",
+        "type": "function",
+        "z": "bbb20ae0.dfe748",
+        "name": "\"POST\" aktivieren",
+        "func": "\nmsg.headers={ \n    'Content-Type': 'application/x-www-form-urlencoded'\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 740,
+        "wires": [
+            [
+                "2426f1e6.94684e"
+            ]
+        ]
+    },
+    {
+        "id": "2426f1e6.94684e",
+        "type": "http request",
+        "z": "bbb20ae0.dfe748",
+        "name": "API Request",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "10.0.0.46/yii2-basic/basic/web/index.php?r=api/postmessage",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 650,
+        "y": 740,
+        "wires": [
+            [
+                "9bd278ed.0b1648",
+                "cecae143.5f4928"
+            ]
+        ]
+    },
+    {
+        "id": "879908aa.80f098",
+        "type": "comment",
+        "z": "bbb20ae0.dfe748",
+        "name": "--------Eingabefeld, selbst gebaut--------",
+        "info": "",
+        "x": 530,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "ced874d2.2cacb",
+        "type": "function",
+        "z": "bbb20ae0.dfe748",
+        "name": "msg.complete",
+        "func": "msg.complete=true;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 220,
+        "y": 740,
+        "wires": [
+            [
+                "7ddb6eb3.252048"
+            ]
+        ]
+    },
+    {
+        "id": "f05ac20c.5205e",
+        "type": "ui_button",
+        "z": "bbb20ae0.dfe748",
+        "name": "",
+        "group": "ee8659eb.06af8",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Aktualisieren",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 170,
+        "y": 520,
+        "wires": [
+            [
+                "cecae143.5f4928",
+                "9bd278ed.0b1648"
+            ]
+        ]
+    },
+    {
+        "id": "689747f2.361cd8",
+        "type": "change",
+        "z": "bbb20ae0.dfe748",
+        "name": "Leere Eingabefelder",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 700,
+        "wires": [
+            [
+                "779f68d1.9e661",
+                "673e4e3.d525db"
+            ]
+        ]
+    },
+    {
+        "id": "ee8659eb.06af8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Chat",
+        "tab": "99d73818.2d34f8",
+        "order": 3,
+        "disp": true,
+        "width": "9",
+        "collapse": false
+    },
+    {
+        "id": "abca8314.ebd8f8",
+        "type": "ui_group",
+        "z": "",
+        "name": "EingabeFORM",
+        "tab": "99d73818.2d34f8",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "25844d4.2e345b2",
+        "type": "ui_group",
+        "z": "",
+        "name": "Statistik",
+        "tab": "99d73818.2d34f8",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "f032d180.bd6428",
+        "type": "ui_group",
+        "z": "",
+        "name": "Engabe-Selbstgebaut",
+        "tab": "99d73818.2d34f8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "99d73818.2d34f8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Chat-Anwendung",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
