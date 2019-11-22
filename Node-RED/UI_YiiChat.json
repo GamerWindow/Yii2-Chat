@@ -2,7 +2,7 @@
     {
         "id": "bbb20ae0.dfe748",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "UI",
         "disabled": false,
         "info": ""
     },
@@ -234,7 +234,7 @@
         "proxy": "",
         "authType": "",
         "x": 600,
-        "y": 520,
+        "y": 500,
         "wires": [
             [
                 "d063c9fe.b86e9"
@@ -248,7 +248,7 @@
         "name": "Chat (Ausgabe)",
         "info": "Ausgabe der Nachrichten",
         "x": 100,
-        "y": 480,
+        "y": 460,
         "wires": []
     },
     {
@@ -265,7 +265,7 @@
         "fwdInMessages": true,
         "templateScope": "local",
         "x": 830,
-        "y": 520,
+        "y": 500,
         "wires": [
             []
         ]
@@ -279,7 +279,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 370,
-        "y": 520,
+        "y": 500,
         "wires": [
             [
                 "576e2d7.829b6d4"
@@ -292,19 +292,20 @@
         "z": "bbb20ae0.dfe748",
         "name": "API Request",
         "method": "POST",
-        "ret": "txt",
+        "ret": "obj",
         "paytoqs": false,
         "url": "10.0.0.46/yii2-basic/basic/web/index.php?r=api/postmessage",
         "tls": "",
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 550,
-        "y": 440,
+        "x": 530,
+        "y": 400,
         "wires": [
             [
                 "cecae143.5f4928",
-                "9bd278ed.0b1648"
+                "9bd278ed.0b1648",
+                "21aa691.8184216"
             ]
         ]
     },
@@ -340,8 +341,8 @@
         "submit": "Abschicken",
         "cancel": "",
         "topic": "",
-        "x": 180,
-        "y": 440,
+        "x": 100,
+        "y": 420,
         "wires": [
             [
                 "a9dd8030.c29fe"
@@ -356,8 +357,8 @@
         "func": "\nmsg.headers={ \n    'Content-Type': 'application/x-www-form-urlencoded'\n};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 370,
-        "y": 440,
+        "x": 330,
+        "y": 400,
         "wires": [
             [
                 "ff98c93d.de48e"
@@ -371,7 +372,7 @@
         "name": "------Programm-------",
         "info": "Eigentliche Anwendung",
         "x": 460,
-        "y": 380,
+        "y": 360,
         "wires": []
     },
     {
@@ -381,7 +382,7 @@
         "name": "Eingabefeld",
         "info": "Eingabe Form und Absenden der Nachrichten",
         "x": 90,
-        "y": 400,
+        "y": 380,
         "wires": []
     },
     {
@@ -391,7 +392,7 @@
         "name": "Statistik",
         "info": "",
         "x": 70,
-        "y": 560,
+        "y": 600,
         "wires": []
     },
     {
@@ -413,7 +414,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 550,
-        "y": 600,
+        "y": 620,
         "wires": [
             [
                 "fd95e01f.736468"
@@ -434,7 +435,7 @@
         "fwdInMessages": true,
         "templateScope": "local",
         "x": 760,
-        "y": 600,
+        "y": 620,
         "wires": [
             []
         ]
@@ -455,7 +456,7 @@
         "delay": "30",
         "topic": "name",
         "x": 70,
-        "y": 680,
+        "y": 700,
         "wires": [
             [
                 "7ddb6eb3.252048"
@@ -481,7 +482,7 @@
         "payloadType": "global",
         "topic": "button",
         "x": 70,
-        "y": 760,
+        "y": 780,
         "wires": [
             [
                 "ced874d2.2cacb"
@@ -502,7 +503,7 @@
         "proxy": "",
         "authType": "",
         "x": 310,
-        "y": 600,
+        "y": 620,
         "wires": [
             [
                 "1b9a5ee7.89e991"
@@ -525,7 +526,7 @@
         "delay": "0",
         "topic": "inhalt",
         "x": 70,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "7ddb6eb3.252048"
@@ -553,7 +554,7 @@
         "reduceInitType": "",
         "reduceFixup": "",
         "x": 290,
-        "y": 700,
+        "y": 720,
         "wires": [
             [
                 "8a4fb47.2e526c8",
@@ -570,7 +571,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 470,
-        "y": 740,
+        "y": 760,
         "wires": [
             [
                 "2426f1e6.94684e"
@@ -591,7 +592,7 @@
         "proxy": "",
         "authType": "",
         "x": 650,
-        "y": 740,
+        "y": 760,
         "wires": [
             [
                 "9bd278ed.0b1648",
@@ -606,7 +607,7 @@
         "name": "--------Eingabefeld, selbst gebaut--------",
         "info": "",
         "x": 530,
-        "y": 660,
+        "y": 680,
         "wires": []
     },
     {
@@ -618,7 +619,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 220,
-        "y": 740,
+        "y": 760,
         "wires": [
             [
                 "7ddb6eb3.252048"
@@ -644,7 +645,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 170,
-        "y": 520,
+        "y": 500,
         "wires": [
             [
                 "cecae143.5f4928",
@@ -672,7 +673,7 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 700,
+        "y": 720,
         "wires": [
             [
                 "779f68d1.9e661",
@@ -681,10 +682,43 @@
         ]
     },
     {
+        "id": "21aa691.8184216",
+        "type": "link out",
+        "z": "bbb20ae0.dfe748",
+        "name": "An Telegram",
+        "links": [
+            "f3ddb452.3e3238"
+        ],
+        "x": 735,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "cc4e78f4.4d53d8",
+        "type": "inject",
+        "z": "bbb20ae0.dfe748",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 540,
+        "wires": [
+            [
+                "cecae143.5f4928",
+                "9bd278ed.0b1648"
+            ]
+        ]
+    },
+    {
         "id": "ee8659eb.06af8",
         "type": "ui_group",
         "z": "",
-        "name": "Chat",
+        "name": "Ausgabe",
         "tab": "99d73818.2d34f8",
         "order": 3,
         "disp": true,
@@ -730,7 +764,7 @@
         "z": "",
         "name": "Chat-Anwendung",
         "icon": "dashboard",
-        "order": 1,
+        "order": 3,
         "disabled": false,
         "hidden": false
     }

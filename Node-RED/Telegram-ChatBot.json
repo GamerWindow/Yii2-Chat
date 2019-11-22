@@ -1,0 +1,122 @@
+[
+    {
+        "id": "adebfa5c.dc13c",
+        "type": "tab",
+        "label": "An Telegram senden",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "bb253da1.2e2a4",
+        "type": "comment",
+        "z": "adebfa5c.dc13c",
+        "name": "Telegram Benachrichtigung",
+        "info": "",
+        "x": 240,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "3bbd08f4.506d3",
+        "type": "function",
+        "z": "adebfa5c.dc13c",
+        "name": "",
+        "func": "var name = msg.payload.name;\nvar inhalt = msg.payload.inhalt;\nmsg.payload = {};\nmsg.payload.chatId = 681554019;\nmsg.payload.type = 'message';\nmsg.payload.content = \"Von: \" + name+ \"\\n Nachricht: \" + inhalt;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [
+                "b2f1eef3.d9b9c8"
+            ]
+        ]
+    },
+    {
+        "id": "b2f1eef3.d9b9c8",
+        "type": "telegram sender",
+        "z": "adebfa5c.dc13c",
+        "name": "Yii2_Chat",
+        "bot": "6e9e1303.bf9ce4",
+        "x": 300,
+        "y": 100,
+        "wires": [
+            [
+                "3c3eb38f.837c4c"
+            ]
+        ]
+    },
+    {
+        "id": "f3ddb452.3e3238",
+        "type": "link in",
+        "z": "adebfa5c.dc13c",
+        "name": "Von UI FLow",
+        "links": [
+            "21aa691.8184216"
+        ],
+        "x": 55,
+        "y": 80,
+        "wires": [
+            [
+                "3bbd08f4.506d3"
+            ]
+        ]
+    },
+    {
+        "id": "83ed2828.95219",
+        "type": "inject",
+        "z": "adebfa5c.dc13c",
+        "name": "Debug Test",
+        "topic": "",
+        "payload": "{\"name\":\"Patrick\",\"inhalt\":\"Debug\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "3bbd08f4.506d3"
+            ]
+        ]
+    },
+    {
+        "id": "3c3eb38f.837c4c",
+        "type": "debug",
+        "z": "adebfa5c.dc13c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 520,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6e9e1303.bf9ce4",
+        "type": "telegram bot",
+        "z": "",
+        "botname": "Yii2_ChatBot",
+        "usernames": "",
+        "chatids": "681554019",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "verboselogging": false
+    }
+]

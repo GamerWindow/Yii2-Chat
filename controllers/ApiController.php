@@ -68,7 +68,11 @@ class ApiController extends Controller
         } else {
             $ok = false;
         }
-        return $this->asJson(["succes" => $ok]);
+        return $this->asJson([
+            "succes" => $ok,
+            "name" => $name,
+            "inhalt" => $inhalt,
+        ]);
     }
 
     public function actionStats()
